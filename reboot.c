@@ -45,8 +45,10 @@ void reboot_prepare(void) {
 }
 
 void reboot(void) {
-  if (!dbus_connection_send(conn, msg, NULL)) {
-    errx(EXIT_FAILURE, "dbus_connection_send failed");
+  DBusError error;
+  dbus_error_init(&error);
+  dbus_connection_send_with_reply_and_block(conn, msg, -1, &error);
+  if (dbus_error_is_set(&error)) {
+    errx(EXIT_FAILURE, "dbus: %s: %s", error.name, error.message);
   }
-  dbus_connection_flush(conn);
 }
