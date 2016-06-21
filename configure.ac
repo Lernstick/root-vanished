@@ -9,5 +9,6 @@ AC_PROG_CC_C99
 
 AC_GNU_SOURCE
 AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION(0.19.7)
 
 AC_OUTPUT([Makefile po/Makefile.in])
